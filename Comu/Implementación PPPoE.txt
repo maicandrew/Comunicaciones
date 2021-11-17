@@ -1,0 +1,35 @@
+Para configurar la interfaz virtual del marcador:
+
+- Crear la interfaz del marcador:
+interface dialer [Numero de marcador]
+- Establecer encapsulación ppp:
+encapsulation ppp
+- Nogocie ip con el ISP:
+ip address negotiated
+- Reduzca el mtu a 1492:
+ip mtu 1492
+- Cree el conjunto del marcador:
+dialer pool [numero del marcador]
+- Implemente autenticación CHAP con username  password asignados por el ISP:
+ppp chap hostname [username asignado]
+ppp chap password [password asignado]
+- Active la interfaz:
+no shutdown
+
+######################################
+Para configurar la conexión DSL al ISP en una interfaz física:
+
+-Ir hasta la interfaz:
+Router(config)# interface [interfaz conectada al ISP]
+- Eliminar cualquier dirección IP asignada:
+no ip address
+- Habilitar PPPoE:
+pppoe enable
+ - Configure la interfaz para que sea un cliente PPPoE con el numero del marcador creado antes:
+pppoe-client dial-pool-number [numero de marcador]
+- Activar la interfaz:
+no shutdown
+
+################################################
+##No olvide verificar el estado de la interfaz##
+################################################

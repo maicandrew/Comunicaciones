@@ -1,0 +1,27 @@
+Configurar cada interfaz con su respectiva Vlan:
+ interface [interfaz/rango de interfaces]
+ switchport mode access
+ switchport acces vlan [vlan a la que pertenece el puerto]
+
+Configurar la interfaz al router como troncal:
+ interface [interfaz que conecta al router]
+ switchport mode trunk
+ switchport trunk allow [rango de Vlans a usar]
+
+Configurar ssh:
+ ip default-gateway [ip de la subinterfaz de administracion de esa sede]
+ interface vlan [vlan de administracion]
+ ip address [alguna ip de administracion de esa sede] [submascara]
+ no shutdown
+ exit
+ ip domain-name cisco.com
+ crypto key generate rsa
+ 1024
+ line vty 0 4
+ transport input ssh
+ login local
+ password cisco
+ exit
+ username [nombre de usuario] password [contraseña]
+ enable secret cisco
+ service password-encryption

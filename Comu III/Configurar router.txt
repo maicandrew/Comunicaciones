@@ -1,0 +1,35 @@
+Configurarinterfaz de conexion serial:
+ configure terminal
+ interface [interfaz serial]
+ ip address [ip de subred serial] [submascara]
+
+Configurar las subinterfaces:
+ configure terminal
+ interface [interfaz del switch].[subinterfaz de la dependencia]
+ encapsulation dot1q [numero de vlan]
+ ip address [ip de red de la dependencia] [submascara de la red]
+
+Configurar listas de acceso:
+ configure terminal
+ access-list [numero de lista] permit ip [ip de la misma red en la otra sede] [wildcard de la red en la otra sede] [ip de la red de destino] [wildcard de la red de destino] (Repetir para todos los direccionamientos admitidos entre redes)
+ access-list [numero de lista] deny ip any any
+ interface g[interfaz del switch].[subinterfaz de la dependencia]
+ ip access-group [numero de lista] in
+ (Para todas las subinterfaces de cada router)
+
+
+Configurar OSPF:
+ configure terminal
+ router ospf 1
+ network [ip de red interna] [submascara]
+ (Se repite para cada subred interna)
+ network [ip de red serial] [submascara]
+
+Configurar CHAP:
+ username [hostname del vecino] secret [contraseña del vecino]
+ interface [interfaz serial]
+ encapsulation ppp
+ ppp authentication chap
+ exit
+ Configuración recíproca en el vecino
+ 

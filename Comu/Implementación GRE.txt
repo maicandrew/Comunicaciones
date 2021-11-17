@@ -1,0 +1,20 @@
+##################################
+- Crear la interfaz de túnel:
+interface tunnel [numero de interfaz tunel]
+- Configure una dirección IP
+tunnel mode gre ip
+ip address [dirección ip] [máscara de subred]
+- Especifique IP de origen:
+tunnel source [IP de origen]
+- Especifique IP de destino:
+tunnel destination [IP de destino]
+
+
+###################################
+Establecer OSPF:
+router ospf 1
+network [subred de la ip asignada a la interfaz tunel] [widecard] area [area a asignar]
+
+###################################
+
+Del otro lado, se debe configurar la ip de destino y origen de manera recíproca
